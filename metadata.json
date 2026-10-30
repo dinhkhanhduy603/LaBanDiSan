@@ -1,0 +1,8 @@
+{
+  "name": "Di Sản Việt",
+  "description": "Ứng dụng tra cứu và hỏi đáp thông minh về các di sản thế giới tại Việt Nam được UNESCO ghi danh kèm trích dẫn nguồn chính thống.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
