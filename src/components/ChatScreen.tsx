@@ -169,12 +169,12 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
         id: 'welcome-reset',
         role: 'model',
         content:
-          'Cuộc trò chuyện đã được làm mới. Mời bạn đặt câu hỏi về các di sản thế giới tại Việt Nam (như Vịnh Hạ Long, Hội An, Cố đô Huế, Mỹ Sơn, Phong Nha - Kẻ Bàng, Tràng An, Hoàng thành Thăng Long, Thành nhà Hồ)!',
+          'Cuộc trò chuyện đã được làm mới. Mời bạn đặt câu hỏi về các di sản thế giới tại Việt Nam (như Vịnh Hạ Long, Hội An, Cố đô Huế, Mỹ Sơn, Phong Nha - Kẻ Bàng, Tràng An, Hoàng thành Thăng Long, Thành nhà Hồ, Yên Tử - Vĩnh Nghiêm - Côn Sơn, Kiếp Bạc)!',
         sources: [
           {
             title: 'UNESCO World Heritage Centre',
             url: 'https://whc.unesco.org',
-            year: '2024',
+            year: 'Chính thức',
             type: 'Cơ quan quốc tế'
           }
         ],

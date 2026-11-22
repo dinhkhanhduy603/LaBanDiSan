@@ -67,7 +67,8 @@ export function analyzeHeritageQuery(query: string, list: DiSan[]): GroundedSear
       'phong-nha-ke-bang': ['phong nha', 'kẻ bàng', 'sơn đoòng', 'hang én', 'động phong nha', 'động thiên đường'],
       'trang-an': ['tràng an', 'tam cốc', 'bích động', 'hoa lư', 'sơn thủy hữu tình'],
       'hoang-thanh-thang-long': ['hoàng thành thăng long', 'thăng long', 'cột cờ hà nội', 'đoan môn', 'điện kính thiên', '18 hoàng diệu'],
-      'thanh-nha-ho': ['thành nhà hồ', 'hồ quý ly', 'tây đô', 'thành đá']
+      'thanh-nha-ho': ['thành nhà hồ', 'hồ quý ly', 'tây đô', 'thành đá'],
+      'yen-tu-vinh-nghiem-con-son-kiep-bac': ['yên tử', 'vĩnh nghiêm', 'côn sơn', 'kiếp bạc', 'trúc lâm', 'trần nhân tông']
     };
 
     const siteKeywords = specificKeywords[site.id] || [];
@@ -140,13 +141,13 @@ export function formatGroundingFallback(query: string, searchResult: GroundedSea
           title: 'Trung tâm Di sản Thế giới UNESCO (UNESCO World Heritage Centre)',
           url: 'https://whc.unesco.org',
           type: 'Cơ quan quốc tế',
-          year: '2024'
+          year: 'Chính thức'
         },
         {
           title: 'Cục Di sản văn hóa Việt Nam',
           url: 'http://dsvh.gov.vn',
           type: 'Cơ quan Nhà nước',
-          year: '2024'
+          year: 'Chính thức'
         }
       ]
     };

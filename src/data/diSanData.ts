@@ -5,7 +5,7 @@ export interface DiSan {
   namCongNhanText: string;
   loaiHinh: 'Di sản thiên nhiên thế giới' | 'Di sản văn hóa thế giới' | 'Di sản hỗn hợp thế giới';
   tinhThanh: string;
-  vungMien: 'Bắc Bộ' | 'Trung Bộ' | 'Nam Bộ';
+  vungMien: 'Bắc Bộ' | 'Bắc Trung Bộ' | 'Trung Bộ' | 'Nam Bộ';
   giaTriTieuBieu: string;
   tieuChiUNESCO: string;
   duongDanHoSoUNESCO: string;
@@ -42,7 +42,7 @@ export const DANH_SACH_DI_SAN: DiSan[] = [
     namCongNhan: [1999],
     namCongNhanText: '1999',
     loaiHinh: 'Di sản văn hóa thế giới',
-    tinhThanh: 'Tỉnh Quảng Nam',
+    tinhThanh: 'Thành phố Đà Nẵng',
     vungMien: 'Trung Bộ',
     giaTriTieuBieu: 'Đô thị cổ Hội An là một ví dụ tiêu biểu trọn vẹn và được bảo tồn đặc biệt tốt về một thương cảng truyền thống châu Á thế kỷ 15 đến 19. Kiến trúc Hội An phản ánh sự giao thoa văn hóa tinh tế giữa văn hóa bản địa Việt Nam với các nền văn hóa Trung Hoa, Nhật Bản và phương Tây qua các thời kỳ lịch sử thương nghiệp sầm uất.',
     tieuChiUNESCO: 'Tiêu chí (ii) Biểu hiện sự giao thoa các giá trị nhân văn quan trọng; Tiêu chí (v) Mẫu hình nổi bật của khu định cư truyền thống.',
@@ -62,10 +62,10 @@ export const DANH_SACH_DI_SAN: DiSan[] = [
     namCongNhan: [1993],
     namCongNhanText: '1993',
     loaiHinh: 'Di sản văn hóa thế giới',
-    tinhThanh: 'Tỉnh Thừa Thiên Huế',
+    tinhThanh: 'Thành phố Huế',
     vungMien: 'Trung Bộ',
     giaTriTieuBieu: 'Quần thể Di tích Cố đô Huế là mẫu mực đỉnh cao của quy hoạch đô thị và kiến trúc cung đình phong kiến Á Đông thời nhà Nguyễn (1802-1945). Quần thể thể hiện sự hài hòa tuyệt đối giữa con người và thiên nhiên thông qua thuyết phong thủy ngũ hành bên dòng sông Hương, tích hợp Kinh thành, Hoàng thành, Tử Cấm thành cùng hệ thống lăng tẩm hoàng gia uy nghiêm.',
-    tieuChiUNESCO: 'Tiêu chí (iii) Bằng chứng độc nhất cho một nền văn minh; Tiêu chí (iv) Mẫu hình kiến trúc cung đình tiêu biểu.',
+    tieuChiUNESCO: 'Tiêu chí (iv) Mẫu hình kiến trúc cung đình tiêu biểu.',
     duongDanHoSoUNESCO: 'https://whc.unesco.org/en/list/678',
     hinhAnh: 'https://mia.vn/media/uploads/blog-du-lich/quan-the-di-tich-co-do-hue-02-1700926497.jpg',
     moTaNgan: 'Trung tâm quyền lực, nghi lễ và văn hóa triều Nguyễn với hệ thống thành quách, cung điện và lăng tẩm hoàng gia tráng lệ.',
@@ -82,7 +82,7 @@ export const DANH_SACH_DI_SAN: DiSan[] = [
     namCongNhan: [1999],
     namCongNhanText: '1999',
     loaiHinh: 'Di sản văn hóa thế giới',
-    tinhThanh: 'Tỉnh Quảng Nam',
+    tinhThanh: 'Thành phố Đà Nẵng',
     vungMien: 'Trung Bộ',
     giaTriTieuBieu: 'Khu đền tháp Mỹ Sơn là bằng chứng ngoại hạng duy nhất về nền văn minh Chăm-pa cổ từng hưng thịnh ở vùng ven biển miền Trung Việt Nam từ thế kỷ 4 đến thế kỷ 13. Nơi đây là thánh địa Ấn Độ giáo tôn thờ thần Shiva, nổi bật với nghệ thuật xây dựng gạch nung kết dính không mạch vữa và những tác phẩm điêu khắc sa thạch tinh xảo phản ánh sự dung hợp văn hóa Ấn Độ và bản địa.',
     tieuChiUNESCO: 'Tiêu chí (ii) Sự kết hợp các nền văn hóa vào nghệ thuật địa phương; Tiêu chí (iii) Bằng chứng duy nhất về một nền văn minh đã biến mất.',
@@ -99,10 +99,10 @@ export const DANH_SACH_DI_SAN: DiSan[] = [
   {
     id: 'phong-nha-ke-bang',
     tenDiSan: 'Vườn quốc gia Phong Nha - Kẻ Bàng',
-    namCongNhan: [2003, 2015],
-    namCongNhanText: '2003, 2015 (tái công nhận về tiêu chí sinh học)',
+    namCongNhan: [2003, 2015, 2025],
+    namCongNhanText: '2003, 2015 (mở rộng về đa dạng sinh học), 2025 (mở rộng liên biên giới cùng VQG Hin Nậm Nô - Lào)',
     loaiHinh: 'Di sản thiên nhiên thế giới',
-    tinhThanh: 'Tỉnh Quảng Bình',
+    tinhThanh: 'Tỉnh Quảng Trị',
     vungMien: 'Trung Bộ',
     giaTriTieuBieu: 'Vườn quốc gia Phong Nha - Kẻ Bàng bảo tồn vùng đá vôi cổ nhất châu Á với niên đại hơn 400 triệu năm, biểu thị cho các giai đoạn phát triển địa mạo karst phức tạp. Vườn quốc gia sở hữu hệ thống hang động ngầm khổng lồ ngoạn mục bậc nhất hành tinh, bao gồm hang Sơn Đoòng - hang động tự nhiên lớn nhất thế giới, cùng hệ sinh thái rừng nhiệt đới trên núi đá vôi có tính đa dạng sinh học và tỷ lệ loài đặc hữu cực kỳ cao.',
     tieuChiUNESCO: 'Tiêu chí (viii) Quá trình địa chất, địa mạo; Tiêu chí (ix) Tiến trình sinh thái học; Tiêu chí (x) Đa dạng sinh học và các loài nguy cấp.',
@@ -110,9 +110,9 @@ export const DANH_SACH_DI_SAN: DiSan[] = [
     hinhAnh: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3swPTELjol8Yym3jAKlqfGqxjiiYxIU_0nldB-Me3vKJ7gPeBG2Ubwws&s=10',
     moTaNgan: 'Vương quốc hang động thế giới với địa chất đá vôi cổ xưa hơn 400 triệu năm và hang Sơn Đoòng lớn nhất hành tinh.',
     diemNoiBat: [
-      'Ghi danh lần đầu năm 2003 về địa chất, và được UNESCO mở rộng công nhận năm 2015 về đa dạng sinh học.',
+      'Ghi danh lần đầu năm 2003 về địa chất, mở rộng năm 2015 về đa dạng sinh học, và tháng 7/2025 được UNESCO phê duyệt mở rộng liên biên giới cùng Vườn quốc gia Hin Nậm Nô (Lào).',
       'Sở hữu hang Sơn Đoòng có thể tích gần 38,5 triệu mét khối, cùng hệ thống sông ngầm dài bậc nhất thế giới.',
-      'Hơn 800 loài thực vật bậc cao và quần thể linh trưởng nguy cấp như Vượn siki, Voọc Hà Tĩnh.'
+      'Hơn 2.900 loài thực vật bậc cao và quần thể linh trưởng nguy cấp như Vượn siki, Voọc Hà Tĩnh.'
     ],
     nguonChinhThuc: 'UNESCO World Heritage Centre - Dossier 951; Ban Quản lý Vườn Quốc gia Phong Nha - Kẻ Bàng.'
   },
@@ -163,7 +163,7 @@ export const DANH_SACH_DI_SAN: DiSan[] = [
     namCongNhanText: '2011',
     loaiHinh: 'Di sản văn hóa thế giới',
     tinhThanh: 'Tỉnh Thanh Hóa',
-    vungMien: 'Bắc Bộ',
+    vungMien: 'Bắc Trung Bộ',
     giaTriTieuBieu: 'Thành nhà Hồ là công trình kiến trúc đá đồ sộ độc nhất vô nhị ở Đông Nam Á, được xây dựng chỉ trong vòng 3 tháng vào năm 1397 dưới triều Hồ Quý Ly. Thành lũy được ghép bằng các khối đá vôi nguyên khối nặng từ 10 đến 26 tấn mà không cần chất kết dính, thể hiện sự kết hợp tuyệt vời giữa triết lý phong thủy phương Đông và kỹ nghệ xây thành quân sự thời Trung cổ.',
     tieuChiUNESCO: 'Tiêu chí (ii) Biểu hiện sự giao thoa tư tưởng Tân Nho giáo và kỹ thuật kiến trúc quân sự; Tiêu chí (iv) Ví dụ xuất sắc về một công trình kiến trúc phòng thủ bằng đá.',
     duongDanHoSoUNESCO: 'https://whc.unesco.org/en/list/1358',
@@ -182,19 +182,19 @@ export const DANH_SACH_DI_SAN: DiSan[] = [
     namCongNhan: [2025],
     namCongNhanText: '2025',
     loaiHinh: 'Di sản văn hóa thế giới',
-    tinhThanh: 'Quảng Ninh, Bắc Giang, Hải Dương',
+    tinhThanh: 'Quảng Ninh, Bắc Ninh, Thành phố Hải Phòng',
     vungMien: 'Bắc Bộ',
     giaTriTieuBieu: 'Quần thể di tích này là trung tâm của Thiền phái Trúc Lâm Yên Tử - dòng thiền mang đậm bản sắc Việt Nam. Đây là sự kết hợp hài hòa giữa các giá trị tâm linh Phật giáo, kiến trúc đền chùa cổ kính và cảnh quan thiên nhiên hùng vĩ, gắn liền với cuộc đời và sự nghiệp của các vị anh hùng dân tộc và thiền sư lỗi lạc như Trần Nhân Tông, Pháp Loa, Huyền Quang.',
-    tieuChiUNESCO: 'Tiêu chí (ii) Biểu hiện sự giao thoa các giá trị nhân văn quan trọng; Tiêu chí (iii) Bằng chứng độc nhất về truyền thống văn hóa và tâm linh.',
+    tieuChiUNESCO: 'Tiêu chí (iii) Bằng chứng độc đáo về truyền thống văn hóa và tâm linh Thiền phái Trúc Lâm; Tiêu chí (vi) Gắn liền trực tiếp với tư tưởng, tín ngưỡng và di sản tinh thần của Phật giáo Trúc Lâm Yên Tử (ghi danh ngày 12/07/2025, Dossier 1732).',
     duongDanHoSoUNESCO: 'https://whc.unesco.org/en/list/1732/',
     hinhAnh: 'https://htv.mediacdn.vn/155334506109014016/2025/12/22/yen-tu-9369-9960jpg-1766366021910-1766366022591562029993.webp',
     moTaNgan: 'Trung tâm Phật giáo thiền phái Trúc Lâm, gắn liền với di sản tinh thần và cảnh quan văn hóa tâm linh từ thời Trần.',
     diemNoiBat: [
       'Gắn liền với di sản của Đức vua - Phật hoàng Trần Nhân Tông.',
-      'Sự liên kết văn hóa giữa ba tỉnh thành Quảng Ninh, Bắc Giang và Hải Dương qua hệ thống di tích Phật giáo.',
+      'Sự liên kết văn hóa giữa ba tỉnh thành Quảng Ninh, Bắc Ninh và Thành phố Hải Phòng qua hệ thống di tích Phật giáo.',
       'Giá trị kết hợp giữa di sản văn hóa tâm linh và cảnh quan thiên nhiên ngoạn mục.'
     ],
-    nguonChinhThuc: 'UNESCO World Heritage Centre - Tentative List; Ban Quản lý Di tích Yên Tử.'
+    nguonChinhThuc: 'UNESCO World Heritage Centre - Dossier 1732; Ban Quản lý Di tích Yên Tử.'
   }
 ];
 
@@ -229,7 +229,7 @@ export const DANH_SACH_NGUON_THAM_KHAO: NguonThamKhaoItem[] = [
     coQuan: 'Bộ Ngoại giao Việt Nam',
     moTa: 'Đầu mối hợp tác chính thức giữa Việt Nam và UNESCO, chủ trì các chương trình di sản, bảo tồn và ngoại giao văn hóa quốc tế.',
     loai: 'Cơ quan Nhà nước',
-    duongDan: 'https://vnembassy-colombo.mofa.gov.vn/vi/web/guest/tin-chi-tiet/chi-tiet/viet-nam-thuc-day-hop-tac-quoc-te-ve-bao-ton-di-san-ket-noi-van-hoa-tai-ky-hop-lan-thu-48-uy-ban-di-san-the-gioi-61042-140.html',
+    duongDan: 'https://mofa.gov.vn',
     uyTin: 'Đại diện quốc gia chính thức của Việt Nam tại UNESCO'
   },
   {
@@ -275,7 +275,7 @@ export const DANH_SACH_NGUON_THAM_KHAO: NguonThamKhaoItem[] = [
   {
     ten: 'Hồ sơ UNESCO Vườn quốc gia Phong Nha - Kẻ Bàng (Dossier 951)',
     coQuan: 'UNESCO WHC',
-    moTa: 'Hồ sơ công nhận năm 2003 và mở rộng năm 2015 về giá trị địa chất và đa dạng sinh học.',
+    moTa: 'Hồ sơ công nhận năm 2003, mở rộng năm 2015 về giá trị địa chất và đa dạng sinh học, cùng quyết định mở rộng liên biên giới tháng 7/2025 với VQG Hin Nậm Nô (Lào).',
     loai: 'Hồ sơ Di sản',
     duongDan: 'https://whc.unesco.org/en/list/951',
     uyTin: 'Văn kiện pháp lý quốc tế số 951'
@@ -287,5 +287,29 @@ export const DANH_SACH_NGUON_THAM_KHAO: NguonThamKhaoItem[] = [
     loai: 'Hồ sơ Di sản',
     duongDan: 'https://whc.unesco.org/en/list/1438',
     uyTin: 'Văn kiện pháp lý quốc tế số 1438'
+  },
+  {
+    ten: 'Hồ sơ UNESCO Khu Trung tâm Hoàng thành Thăng Long - Hà Nội (Dossier 1328)',
+    coQuan: 'UNESCO WHC',
+    moTa: 'Hồ sơ ghi danh năm 2010 xác lập giá trị nổi bật toàn cầu của trung tâm quyền lực chính trị liên tục suốt 13 thế kỷ tại Thăng Long - Hà Nội.',
+    loai: 'Hồ sơ Di sản',
+    duongDan: 'https://whc.unesco.org/en/list/1328',
+    uyTin: 'Văn kiện pháp lý quốc tế số 1328'
+  },
+  {
+    ten: 'Hồ sơ UNESCO Thành nhà Hồ (Dossier 1358)',
+    coQuan: 'UNESCO WHC',
+    moTa: 'Hồ sơ ghi danh năm 2011 ghi nhận kỳ quan kiến trúc phòng thủ bằng đá nguyên khối độc đáo tại Đông Nam Á.',
+    loai: 'Hồ sơ Di sản',
+    duongDan: 'https://whc.unesco.org/en/list/1358',
+    uyTin: 'Văn kiện pháp lý quốc tế số 1358'
+  },
+  {
+    ten: 'Hồ sơ UNESCO Quần thể di tích và danh thắng Yên Tử - Vĩnh Nghiêm - Côn Sơn, Kiếp Bạc (Dossier 1732)',
+    coQuan: 'UNESCO WHC',
+    moTa: 'Hồ sơ quyết định ghi danh ngày 12/07/2025 theo tiêu chí (iii) và (vi) về truyền thống văn hóa và tâm linh Thiền phái Trúc Lâm.',
+    loai: 'Hồ sơ Di sản',
+    duongDan: 'https://whc.unesco.org/en/list/1732/',
+    uyTin: 'Văn kiện pháp lý quốc tế số 1732'
   }
 ];
