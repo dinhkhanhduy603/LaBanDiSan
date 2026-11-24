@@ -1,7 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { DANH_SACH_DI_SAN, DANH_SACH_NGUON_THAM_KHAO } from '../data/diSanData.ts';
-import { validateHeritageData, searchHeritage, analyzeHeritageQuery, formatGroundingFallback } from './heritageLogic.ts';
+import fs from 'node:fs';
+import path from 'node:path';
+import { DANH_SACH_DI_SAN, DANH_SACH_NGUON_THAM_KHAO, FALLBACK_HERITAGE_IMAGE } from '../data/diSanData.ts';
+import {
+  validateHeritageData,
+  searchHeritage,
+  analyzeHeritageQuery,
+  formatGroundingFallback,
+  getPrimaryHeritageImage,
+  getGalleryImages
+} from './heritageLogic.ts';
 
 test('Heritage dataset has at least 5 heritages with required fields', () => {
   assert.ok(DANH_SACH_DI_SAN.length >= 5, 'Dataset must have at least 5 heritages');
@@ -130,4 +139,42 @@ test('analyzeHeritageQuery matches Yên Tử - Vĩnh Nghiêm - Côn Sơn, Kiếp
       `Query should match yen-tu-vinh-nghiem-con-son-kiep-bac: ${q}`
     );
   }
+});
+
+test('disan.json provides local /images/ arrays and all referenced image files exist in public/images/', () => {
+  const publicDir = path.resolve(process.cwd(), 'public');
+  assert.ok(
+    fs.existsSync(path.join(publicDir, FALLBACK_HERITAGE_IMAGE.replace(/^\//, ''))),
+    `Fallback image must exist at public${FALLBACK_HERITAGE_IMAGE}`
+  );
+
+  for (const item of DANH_SACH_DI_SAN) {
+    assert.ok(Array.isArray(item.hinhAnh), `${item.id}.hinhAnh must be an array`);
+    assert.ok(item.hinhAnh.length >= 2, `${item.id}.hinhAnh must contain at least 2 gallery images`);
+    for (const imgPath of item.hinhAnh) {
+      assert.ok(imgPath.startsWith('/images/'), `${item.id} image path must start with /images/: ${imgPath}`);
+      const diskPath = path.join(publicDir, imgPath.replace(/^\//, ''));
+      assert.ok(fs.existsSync(diskPath), `Missing image file on disk for ${item.id}: ${diskPath}`);
+      assert.ok(fs.statSync(diskPath).size > 1024, `Image file looks empty/corrupt: ${diskPath}`);
+    }
+  }
+});
+
+test('getPrimaryHeritageImage, getGalleryImages, and validateHeritageData handle valid and missing hinhAnh safely', () => {
+  assert.equal(getPrimaryHeritageImage(['/images/ha-long-1.jpg', '/images/ha-long-2.jpg']), '/images/ha-long-1.jpg');
+  assert.equal(getPrimaryHeritageImage(['   ', '/images/hue-1.jpg']), '/images/hue-1.jpg');
+  assert.equal(getPrimaryHeritageImage([]), FALLBACK_HERITAGE_IMAGE);
+  assert.equal(getPrimaryHeritageImage(undefined), FALLBACK_HERITAGE_IMAGE);
+
+  assert.deepEqual(
+    getGalleryImages(['/images/ha-long-1.jpg', '', '/images/ha-long-2.jpg']),
+    ['/images/ha-long-1.jpg', '/images/ha-long-2.jpg']
+  );
+  assert.deepEqual(getGalleryImages([]), [FALLBACK_HERITAGE_IMAGE]);
+  assert.deepEqual(getGalleryImages(undefined), [FALLBACK_HERITAGE_IMAGE]);
+
+  const sample = DANH_SACH_DI_SAN[0];
+  assert.equal(validateHeritageData(sample), true);
+  assert.equal(validateHeritageData({ ...sample, hinhAnh: [] }), false);
+  assert.equal(validateHeritageData({ ...sample, hinhAnh: undefined }), false);
 });

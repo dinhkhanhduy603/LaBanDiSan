@@ -1,4 +1,22 @@
-import type { DiSan } from '../data/diSanData.ts';
+import { FALLBACK_HERITAGE_IMAGE, type DiSan } from '../data/diSanData.ts';
+
+export function getPrimaryHeritageImage(hinhAnh?: string[]): string {
+  if (Array.isArray(hinhAnh)) {
+    const firstValid = hinhAnh.find((src) => typeof src === 'string' && src.trim().length > 0);
+    if (firstValid) return firstValid.trim();
+  }
+  return FALLBACK_HERITAGE_IMAGE;
+}
+
+export function getGalleryImages(hinhAnh?: string[]): string[] {
+  if (Array.isArray(hinhAnh)) {
+    const valid = hinhAnh
+      .filter((src): src is string => typeof src === 'string' && src.trim().length > 0)
+      .map((src) => src.trim());
+    if (valid.length > 0) return valid;
+  }
+  return [FALLBACK_HERITAGE_IMAGE];
+}
 
 export function validateHeritageData(item: Partial<DiSan>): boolean {
   if (!item) return false;
@@ -7,7 +25,11 @@ export function validateHeritageData(item: Partial<DiSan>): boolean {
   const hasType = typeof item.loaiHinh === 'string' && item.loaiHinh.trim().length > 0;
   const hasValue = typeof item.giaTriTieuBieu === 'string' && item.giaTriTieuBieu.trim().length > 0;
   const hasUrl = typeof item.duongDanHoSoUNESCO === 'string' && item.duongDanHoSoUNESCO.startsWith('http');
-  return Boolean(hasName && hasYear && hasType && hasValue && hasUrl);
+  const hasImages =
+    Array.isArray(item.hinhAnh) &&
+    item.hinhAnh.length > 0 &&
+    item.hinhAnh.every((img) => typeof img === 'string' && img.trim().length > 0);
+  return Boolean(hasName && hasYear && hasType && hasValue && hasUrl && hasImages);
 }
 
 export function searchHeritage(query: string, filterType: string, list: DiSan[]): DiSan[] {

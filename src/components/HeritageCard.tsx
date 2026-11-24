@@ -1,6 +1,7 @@
 import React from 'react';
-import { Calendar, MapPin, ExternalLink, MessageSquareQuote, ArrowRight } from 'lucide-react';
-import { DiSan } from '../data/diSanData.ts';
+import { Calendar, MapPin, MessageSquareQuote, ArrowRight } from 'lucide-react';
+import { DiSan, FALLBACK_HERITAGE_IMAGE } from '../data/diSanData.ts';
+import { getPrimaryHeritageImage } from '../utils/heritageLogic.ts';
 
 interface HeritageCardProps {
   heritage: DiSan;
@@ -13,6 +14,15 @@ export const HeritageCard: React.FC<HeritageCardProps> = ({
   onSelect,
   onAskAI
 }) => {
+  const primaryImage = getPrimaryHeritageImage(heritage.hinhAnh);
+
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const img = e.currentTarget;
+    if (img.dataset.fallbackApplied === 'true') return;
+    img.dataset.fallbackApplied = 'true';
+    img.src = FALLBACK_HERITAGE_IMAGE;
+  };
+
   const getTypeBadgeClass = (loai: string) => {
     switch (loai) {
       case 'Di sản thiên nhiên thế giới':
@@ -30,8 +40,9 @@ export const HeritageCard: React.FC<HeritageCardProps> = ({
         {/* Thumbnail Image Container */}
         <div className="relative h-48 w-full overflow-hidden bg-[#3b2214]">
           <img
-            src={heritage.hinhAnh}
+            src={primaryImage}
             alt={heritage.tenDiSan}
+            onError={handleImageError}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
             loading="lazy"
           />
@@ -82,6 +93,7 @@ export const HeritageCard: React.FC<HeritageCardProps> = ({
         <button
           onClick={() => onSelect(heritage)}
           className="w-full py-2 px-3 rounded-xl border border-[#c4a98a] bg-[#faf5ec] hover:bg-[#ebdcc8] text-[#4a2e18] text-xs font-semibold flex items-center justify-center gap-1.5 transition active:scale-95"
+          aria-label={`Xem chi tiết ${heritage.tenDiSan}`}
         >
           <span>Chi tiết</span>
           <ArrowRight className="w-3.5 h-3.5 text-[#78350f]" />

@@ -1,6 +1,18 @@
-import React from 'react';
-import { X, ExternalLink, Calendar, MapPin, Award, BookOpen, MessageSquareQuote, CheckCircle2 } from 'lucide-react';
-import { DiSan } from '../data/diSanData.ts';
+import React, { useState, useEffect } from 'react';
+import {
+  X,
+  Calendar,
+  MapPin,
+  Award,
+  BookOpen,
+  MessageSquareQuote,
+  CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
+  Images
+} from 'lucide-react';
+import { DiSan, FALLBACK_HERITAGE_IMAGE } from '../data/diSanData.ts';
+import { getGalleryImages } from '../utils/heritageLogic.ts';
 
 interface HeritageDetailModalProps {
   heritage: DiSan | null;
@@ -13,7 +25,49 @@ export const HeritageDetailModal: React.FC<HeritageDetailModalProps> = ({
   onClose,
   onAskAI
 }) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const galleryImages = heritage ? getGalleryImages(heritage.hinhAnh) : [];
+  const totalImages = galleryImages.length;
+  const safeIndex = totalImages > 0 ? activeIndex % totalImages : 0;
+
+  useEffect(() => {
+    setActiveIndex(0);
+  }, [heritage?.id]);
+
+  useEffect(() => {
+    if (!heritage) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      } else if (e.key === 'ArrowRight' && totalImages > 1) {
+        setActiveIndex((prev) => (prev + 1) % totalImages);
+      } else if (e.key === 'ArrowLeft' && totalImages > 1) {
+        setActiveIndex((prev) => (prev - 1 + totalImages) % totalImages);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [heritage, totalImages, onClose]);
+
   if (!heritage) return null;
+
+  const activeImageSrc = galleryImages[safeIndex] ?? FALLBACK_HERITAGE_IMAGE;
+
+  const handlePrev = () => {
+    setActiveIndex((prev) => (prev - 1 + totalImages) % totalImages);
+  };
+
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev + 1) % totalImages);
+  };
+
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const img = e.currentTarget;
+    if (img.dataset.fallbackApplied === 'true') return;
+    img.dataset.fallbackApplied = 'true';
+    img.src = FALLBACK_HERITAGE_IMAGE;
+  };
 
   return (
     <div
@@ -23,27 +77,64 @@ export const HeritageDetailModal: React.FC<HeritageDetailModalProps> = ({
       className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-5 animate-in fade-in duration-200"
     >
       <div className="relative w-full max-w-2xl bg-[#fffdf9] rounded-2xl shadow-2xl border border-[#d97706]/30 overflow-hidden text-[#382314] max-h-[90vh] flex flex-col">
-        {/* Modal Header with Image */}
+        {/* Modal Header with Image Slideshow */}
         <div className="relative h-56 sm:h-64 w-full bg-[#4a2e18] overflow-hidden shrink-0">
           <img
-            src={heritage.hinhAnh}
-            alt={heritage.tenDiSan}
-            className="w-full h-full object-cover"
-            loading="lazy"
+            key={`${heritage.id}-${safeIndex}-${activeImageSrc}`}
+            src={activeImageSrc}
+            alt={`${heritage.tenDiSan} - Ảnh ${safeIndex + 1}`}
+            onError={handleImageError}
+            className="w-full h-full object-cover transition-opacity duration-300"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#2a170a] via-[#2a170a]/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#2a170a] via-[#2a170a]/35 to-transparent pointer-events-none" />
+
+          {/* Photo Counter Badge */}
+          {totalImages > 1 && (
+            <div
+              data-testid="gallery-counter"
+              className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/55 backdrop-blur-md text-[#fef3c7] text-xs font-semibold border border-white/15"
+            >
+              <Images className="w-3.5 h-3.5 text-[#fbbf24]" />
+              <span>
+                {safeIndex + 1} / {totalImages}
+              </span>
+            </div>
+          )}
 
           {/* Close button */}
           <button
+            type="button"
             onClick={onClose}
-            className="absolute top-3 right-3 p-2 rounded-full bg-black/50 text-[#fef3c7] hover:bg-black/80 transition focus:outline-none focus:ring-2 focus:ring-[#f59e0b]"
+            className="absolute top-3 right-3 p-2 rounded-full bg-black/55 text-[#fef3c7] hover:bg-black/80 transition focus:outline-none focus:ring-2 focus:ring-[#f59e0b]"
             aria-label="Đóng cửa sổ chi tiết"
           >
             <X className="w-5 h-5" />
           </button>
 
+          {/* Slideshow Prev / Next Controls */}
+          {totalImages > 1 && (
+            <>
+              <button
+                type="button"
+                onClick={handlePrev}
+                className="absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-[#fef3c7] hover:bg-black/80 transition focus:outline-none focus:ring-2 focus:ring-[#f59e0b]"
+                aria-label="Ảnh trước"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                type="button"
+                onClick={handleNext}
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-[#fef3c7] hover:bg-black/80 transition focus:outline-none focus:ring-2 focus:ring-[#f59e0b]"
+                aria-label="Ảnh tiếp theo"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </>
+          )}
+
           {/* Badge & Title */}
-          <div className="absolute bottom-3 left-4 right-4 text-white">
+          <div className="absolute bottom-3 left-4 right-4 text-white pointer-events-none">
             <div className="flex flex-wrap items-center gap-2 mb-1.5">
               <span
                 className={`text-xs font-semibold px-2.5 py-0.5 rounded-full border shadow-sm ${
@@ -65,6 +156,40 @@ export const HeritageDetailModal: React.FC<HeritageDetailModalProps> = ({
             </h2>
           </div>
         </div>
+
+        {/* Thumbnail Gallery Strip */}
+        {totalImages > 1 && (
+          <div
+            className="px-4 py-2.5 bg-[#f7efe2] border-b border-[#e8d5bb] flex items-center gap-2 overflow-x-auto shrink-0"
+            aria-label={`Thư viện ảnh của ${heritage.tenDiSan}`}
+          >
+            {galleryImages.map((src, idx) => {
+              const isActive = idx === safeIndex;
+              return (
+                <button
+                  key={`${heritage.id}-thumb-${idx}`}
+                  type="button"
+                  onClick={() => setActiveIndex(idx)}
+                  aria-label={`Xem ảnh ${idx + 1} của ${heritage.tenDiSan}`}
+                  aria-pressed={isActive}
+                  className={`relative h-14 w-20 sm:h-16 sm:w-24 rounded-lg overflow-hidden shrink-0 border-2 transition focus:outline-none focus:ring-2 focus:ring-[#d97706] ${
+                    isActive
+                      ? 'border-[#b45309] ring-2 ring-[#f59e0b]/40 shadow-sm'
+                      : 'border-transparent opacity-70 hover:opacity-100'
+                  }`}
+                >
+                  <img
+                    src={src}
+                    alt={`${heritage.tenDiSan} - Hình thu nhỏ ${idx + 1}`}
+                    onError={handleImageError}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </button>
+              );
+            })}
+          </div>
+        )}
 
         {/* Modal Scrollable Body */}
         <div className="p-4 sm:p-6 overflow-y-auto space-y-5 text-sm sm:text-base leading-relaxed">
